@@ -16,6 +16,14 @@ class Slider {
 		this.sliders.forEach(elem => elem.insertAdjacentHTML('beforeEnd', title));
 	}
 
+	hiddenTitle(e) {
+		const t = e.target.closest('.slider');
+
+		if (t) {
+			t.lastElementChild.classList.add('hidden');
+		}
+	}
+
 	getInterest(a, b) {
 		return (a / b * 100) + '%';
 	}
@@ -40,7 +48,6 @@ class Slider {
 
 		if (t) {
 			t.firstElementChild.style.width = this.getInterest(x, t.offsetWidth);
-			t.lastElementChild.style.left = this.getInterest(x, t.offsetWidth);
 		}
 	}
 
@@ -52,10 +59,10 @@ class Slider {
 
 	init() {
 		this.generateTitle();
-		this.sliderWrap.addEventListener('mousedown', this.startResizePic.bind(this));
+		this.sliderWrap.addEventListener('mouseenter', this.hiddenTitle.bind(this), true);
+		this.sliderWrap.addEventListener('click', this.startResizePic.bind(this));
 		this.sliderWrap.addEventListener('mousemove', this.resizePic.bind(this));
-		this.sliderWrap.addEventListener('mouseleave', this.stopResizePic.bind(this), true);
-		this.sliderWrap.addEventListener('mouseup', this.stopResizePic.bind(this));
+		this.sliderWrap.addEventListener('mouseout', this.stopResizePic.bind(this));
 	}
 }
 
