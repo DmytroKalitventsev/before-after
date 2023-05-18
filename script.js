@@ -48,11 +48,7 @@ class Slider {
 
 		if (t) {
 			t.firstElementChild.style.width = this.getInterest(x, t.offsetWidth);
-		}
-	}
-
-	stopResizePic(e) {
-		if (!e.target.closest('.slider')) {
+		} else {
 			this.#isMouseDown = false;
 		}
 	}
@@ -62,7 +58,6 @@ class Slider {
 		this.sliderWrap.addEventListener('mouseenter', this.hiddenTitle.bind(this), true);
 		this.sliderWrap.addEventListener('click', this.startResizePic.bind(this));
 		this.sliderWrap.addEventListener('mousemove', this.resizePic.bind(this));
-		this.sliderWrap.addEventListener('mouseout', this.stopResizePic.bind(this));
 	}
 }
 
